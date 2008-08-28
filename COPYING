@@ -1,0 +1,33 @@
+Entropy Oscillator - Electronics and PCB design
+(c) 2008 Peter Todd <pete@petertodd.org>
+
+The files in this package are released under the Creative Commons
+Attribution-Noncommercial-Share Alike 3.0 License, except for the files under
+the sym directory which are released under the GNU General Public License
+version 2 or greater, see sym/COPYING.
+
+Note that some of the footprints and symbols under sym are derived from symbols
+and footprints from the gEDA package and therefore must be released under the
+GPL.
+
+To view a copy of the Creative Commons Attribution-Noncommercial-Share Alike
+3.0 License, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a
+letter to Creative Commons, 171 Second Street, Suite 300, San Francisco,
+California, 94105, USA.
+
+You are free:
+
+to Share — to copy, distribute and transmit the work
+to Remix — to adapt the work
+
+Under the following conditions:
+
+Attribution. You must attribute the work in the manner specified by the author
+or licensor (but not in any way that suggests that they endorse you or your use
+of the work).
+
+Noncommercial. You may not use this work for commercial purposes.
+
+Share Alike. If you alter, transform, or build upon this work, you may
+distribute the resulting work only under the same or similar license to this
+one.
