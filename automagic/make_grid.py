@@ -1,17 +1,21 @@
 #!/usr/bin/python
 
+from units import *
+from pcb import Pcb
 
 array_width = 8
 array_height = 13
 
-pitch_x = 2800
-pitch_y = 402
+pitch_x = 2.800 * IN
+pitch_y = 4.02 * IN
 
-margin_vert = 1000
-margin_horz = 1000
+margin_vert = 1.5 * IN
+margin_horz = 1.5 * IN
 
 board_width = (pitch_x * array_width) + (margin_vert * 2)
 board_height = (pitch_y * array_height) + (margin_horz * 2)
+
+pcb = Pcb(board_width,board_height)
 
 fpcb = open('grid.pcb','w')
 
@@ -102,9 +106,4 @@ for row in range(0,array_width):
 
 mk_line(100,150,200,250,25,solder)
 
-# dump layer contents
-for (n,v) in layers:
-    print >>fpcb,'Layer(%s)' % n
-    print >>fpcb,'('
-    print >>fpcb,'\n'.join(['\t' + c for c in v])
-    print >>fpcb,')'
+print '\n'.join(pcb.render())
