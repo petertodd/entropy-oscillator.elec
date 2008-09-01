@@ -15,6 +15,27 @@ board_height = (pitch_y * array_height) + (margin_horz * 2)
 
 fpcb = open('grid.pcb','w')
 
+solder = []
+component = []
+
+layers = (('1 "solder"',solder),
+          ('2 "GND-sldr"',[]),
+          ('3 "Vcc-sldr"',[]),
+          ('4 "component"',component),
+          ('5 "GND-comp"',[]),
+          ('6 "Vcc-comp"',[]),
+          ('7 "unused"',[]),
+          ('8 "unused"',[]))
+
+def mk_line(x1,y1,x2,y2,thick,layer = solder):
+    # FIXME: what is the 42 for?
+    layer.append( \
+"""Line[%(x1)d %(y1)d %(x2)d %(y2)d %(thick)d 42 ""]""" \
+% {'x1':x1 * 100,
+   'y1':y1 * 100,
+   'x2':x2 * 100,
+   'y2':y2 * 100,
+   'thick':thick * 100})
 
 def mk_flip_disk(x,y,name):
     """Make a geda pcb footprint for the 2.7" flip disk strip"""
@@ -41,6 +62,8 @@ def mk_flip_disk(x,y,name):
         """ % flags 
 
     for i in range(0,14):
+        x = ((i / 2) * 400) + (126 * (i % 2))
+        y = 275 * (i % 2)
         print >>fpcb,put_pin(\
                  { 'x': ((i / 2) * 400) + (126 * (i % 2)),
                   'y': 275 * (i % 2),
@@ -75,3 +98,13 @@ for row in range(0,array_width):
         mk_flip_disk((row * pitch_x) + margin_horz,
                      (col * pitch_y) + margin_vert,
                      'F%d' % n)
+
+
+mk_line(100,150,200,250,25,solder)
+
+# dump layer contents
+for (n,v) in layers:
+    print >>fpcb,'Layer(%s)' % n
+    print >>fpcb,'('
+    print >>fpcb,'\n'.join(['\t' + c for c in v])
+    print >>fpcb,')'
