@@ -20,6 +20,8 @@ class Pcb:
                   ('7 "unused"',deque()),
                   ('8 "unused"',deque()))
 
+        self.elements = []
+
     def render(self):
         r = deque()
         r.append(\
@@ -31,10 +33,12 @@ Thermal[0.500000]
 DRC[1000 1000 1000 1000 1500 1000]
 Flags(0x00000000000010d8)
 Groups("1,2,3,s:4,5,6,c:s:c")
-Styles["Signal,1500,4000,2000,1000:Power,2500,6000,3500,1000:Fat,4000,6000,3500,1000
-:Skinny,800,3600,2000,1000"]""" \
+Styles["Signal,1500,4000,2000,1000:Power,2500,6000,3500,1000:Fat,4000,6000,3500,1000:Skinny,800,3600,2000,1000"]""" \
     % {'board_width':self.width / CMIL,
        'board_height':self.height / CMIL})
+
+        for e in self.elements:
+            r.extend(e.render())
 
         for (n,v) in self.layers:
             r.append('Layer(%s)' % n)
